@@ -1,5 +1,6 @@
 require 'rake'
 
+
 require ::File.expand_path('../config/environment', __FILE__)
 
 # Include all of ActiveSupport's core class extensions, e.g., String#camelize
@@ -85,7 +86,7 @@ end
 
 namespace :db do
   desc "Drop, create, and migrate the database"
-  task :reset => [:drop, :create, :migrate]
+  task :reset => [:drop, :create, :migrate, :seed]
 
   desc "Create the databases at #{DB_NAME}"
   task :create do
@@ -101,6 +102,7 @@ namespace :db do
 
   desc "Migrate the database (options: VERSION=x, VERBOSE=false, SCOPE=blog)."
   task :migrate do
+    require 'faker'
     ActiveRecord::Migrator.migrations_paths << File.dirname(__FILE__) + 'db/migrate'
     ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
     ActiveRecord::Migrator.migrate(ActiveRecord::Migrator.migrations_paths, ENV["VERSION"] ? ENV["VERSION"].to_i : nil) do |migration|

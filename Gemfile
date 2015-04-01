@@ -8,12 +8,14 @@ gem 'pg'
 gem 'sinatra'
 gem 'sinatra-contrib'
 
-gem 'activesupport', '~>4.1'
-gem 'activerecord', '~>4.1'
+gem 'activesupport', '4.2'
+gem 'activerecord', '4.2'
 
 gem 'rake'
-
+gem 'faker'
 gem 'shotgun'
+
+gem 'bcrypt'
 
 group :test do
   gem 'shoulda-matchers'
@@ -23,6 +25,7 @@ group :test do
 end
 
 group :test, :development do
+  gem 'debugger'
   gem 'factory_girl'
-  gem 'faker'
+
 end
